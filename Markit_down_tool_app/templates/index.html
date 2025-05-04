@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarkItDown - File to Markdown Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-file-alt"></i>
+                <h1>MarkItDown</h1>
+            </div>
+            <p class="tagline">Convert any document to beautiful Markdown</p>
+        </header>
+
+        <main>
+            <div class="converter-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="file-tab">
+                        <i class="fas fa-file"></i> File Upload
+                    </button>
+                    <button class="tab-btn" data-tab="youtube-tab">
+                        <i class="fab fa-youtube"></i> YouTube URL
+                    </button>
+                </div>
+
+                <div class="tab-content active" id="file-tab">
+                    <div class="upload-area" id="drop-area">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <p>Drag & drop your file here or</p>
+                        <label for="file-input" class="upload-btn">Choose File</label>
+                        <input type="file" id="file-input" hidden>
+                        <p class="file-name" id="file-name"></p>
+                    </div>
+
+                    <div class="supported-formats">
+                        <h3>Supported Formats</h3>
+                        <div class="format-groups">
+                            <div class="format-group">
+                                <h4>📝 Documents</h4>
+                                <ul>
+                                    <li>Word (.docx, .doc)</li>
+                                    <li>PDF</li>
+                                    <li>EPub</li>
+                                </ul>
+                            </div>
+                            <div class="format-group">
+                                <h4>📊 Spreadsheets & Presentations</h4>
+                                <ul>
+                                    <li>Excel (.xlsx, .xls)</li>
+                                    <li>PowerPoint (.pptx, .ppt)</li>
+                                </ul>
+                            </div>
+                            <div class="format-group">
+                                <h4>🌐 Web & Others</h4>
+                                <ul>
+                                    <li>HTML</li>
+                                    <li>CSV, JSON, XML</li>
+                                    <li>ZIP (iterates over contents)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="youtube-tab">
+                    <div class="youtube-form">
+                        <div class="input-group">
+                            <i class="fab fa-youtube"></i>
+                            <input type="text" id="youtube-url" placeholder="Paste YouTube URL here">
+                        </div>
+                        <button id="youtube-convert-btn" class="convert-btn">
+                            <i class="fas fa-sync-alt"></i> Convert
+                        </button>
+                    </div>
+                    <div class="youtube-preview">
+                        <div id="youtube-thumbnail" class="hidden">
+                            <img src="" alt="YouTube Video Thumbnail">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div id="youtube-info" class="hidden">
+                            <h3 id="video-title"></h3>
+                            <p id="video-channel"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="convert-section">
+                    <div class="convert-btn-container">
+                        <button id="convert-btn" class="convert-btn" disabled>
+                            <i class="fas fa-sync-alt"></i> Convert to Markdown
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-container hidden" id="result-container">
+                <div class="result-header">
+                    <h2>Conversion Result</h2>
+                    <div class="result-actions">
+                        <button id="copy-btn" class="action-btn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button id="download-btn" class="action-btn">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+                <div class="result-content">
+                    <pre id="markdown-result"></pre>
+                </div>
+            </div>
+        </main>
+
+        <div class="loading-overlay hidden" id="loading-overlay">
+            <div class="loader"></div>
+            <p>Converting your file...</p>
+        </div>
+
+        <div class="toast hidden" id="toast">
+            <div class="toast-content">
+                <i class="fas fa-check-circle"></i>
+                <p id="toast-message"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MarkItDown - Convert files to beautiful Markdown</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
